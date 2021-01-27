@@ -1,4 +1,4 @@
-import { Option, isNone, isSome, some, none } from "../options";
+import { Option, isNone, isSome, some, none, map } from "../options";
 
 describe("Option testing", () => {
   const testr = (val: number): Option<string> => {
@@ -8,8 +8,17 @@ describe("Option testing", () => {
       return none();
     }
   };
+
+  const cubeNumber = (z: number): number => z ** 3;
+
   it("should be some", () => {
     const val = isSome(testr(15));
     expect(val).toBe(true);
+  });
+
+  it("should return 8", () => {
+    const val = map(cubeNumber)(some(2));
+
+    expect(isSome(val)).toBe(true);
   });
 });

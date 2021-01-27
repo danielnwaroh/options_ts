@@ -23,9 +23,22 @@ export const isSome = <T>(val: Option<T>): val is Some<T> => {
 };
 
 export const none = (): None => {
-  return { option: Choices.none };
+  return {
+    option: Choices.none,
+  };
 };
 
 export const some = <S>(val: S): Some<S> => {
-  return { option: Choices.some, value: val };
+  return {
+    option: Choices.some,
+    value: val,
+  };
 };
+
+export const map = <A, B>(f1: (a: A) => B) => (b: Option<A>): Option<B> => {
+  return isSome(b) ? some(f1(b.value)) : none();
+};
+
+// export const mapB = <A, B>(f1: (a: A) => B, b: Option<A>): Option<B> => {
+//   return isSome(b) ? some(f1(b.value)) : none();
+// };
